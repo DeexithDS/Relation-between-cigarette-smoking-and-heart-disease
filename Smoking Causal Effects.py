@@ -122,13 +122,17 @@ print(model.summary())
 
 print((model.null_deviance-model.deviance)/model.null_deviance)
 
-
+##We see that there is less correlation between age and cigsperday from heatmap. So there will be no problem of multicollinearity. There is also a correlation between age and CHD.
 ##
 formula = ('y ~ cigsPerDay + age')
 
 model = logit(formula = formula, data = train).fit()
 
 print(model.summary())
+print((model.null_deviance-model.deviance)
+print((model.null_deviance-model.deviance)/model.null_deviance)
+
+##Large Deviance and Loglihood change. Also the coefficient of cigsPerDay increased showing there was downward bias.P-values all below 0.05
 
 ##
 formula = 'y ~ cigsPerDay + age + male'
@@ -137,6 +141,12 @@ model = logit(formula = formula, data = train).fit()
 
 print(model.summary())
 
+print((model.null_deviance-model.deviance)
+print((model.null_deviance-model.deviance)/model.null_deviance)
+ 
+##There is little correlation between age, gender and cigsPerDay. Also, some correlation between gender and CHD. 
+##Large Deviance and Loglihood change. Also the coefficient of cigsPerDay decreased showing there was upward bias. P-values all below 0.05.
+       
 ##Adding BPmeds to reduce deviance, Pseudo R squared.
 
 formula = 'y ~ cigsPerDay + age + male + BPMeds'
@@ -145,7 +155,9 @@ model = logit(formula = formula, data = train).fit()
 
 print(model.summary())
 
-##The coefficient of cigsperDay remains constant
+##The coefficient of cigsperDay remains constant.
+##There is little correlation between age, gender, BPMeds, cigsPerDay. Also, some correlation between BPMeds and CHD. 
+##Large Deviance and Loglihood change. Also the coefficient of cigsPerDay remains constant. P-values all below 0.005.
 
 formula = 'y ~ cigsPerDay + age + male + BPMeds + prevalentStroke'
 
@@ -162,7 +174,7 @@ print(AME.summary())
 
 ##CONCLUSION:
 
-##With increase in one cigarette smoking per day, increases the risk of heart diesease by 2%
+##With increase in one cigarette smoking per day, increases the risk of heart diesease by 0.2%
 
 
 
